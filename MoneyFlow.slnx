@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="BusinessObject/BusinessObjects.csproj" />
+  <Project Path="DataAccessLayer/DataAccessLayer.csproj" />
+  <Project Path="MoneyFlowApp/MoneyFlowApp.csproj" />
+  <Project Path="Repositories/Repositories.csproj" />
+  <Project Path="Service/Service.csproj" />
+</Solution>
