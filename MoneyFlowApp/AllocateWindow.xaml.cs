@@ -74,7 +74,7 @@ namespace MoneyFlowApp
                 }
                 if (DpDate.SelectedDate == null)
                 {
-                    TxtError.Text = "Vui lòng chọn ngày giao dịch!";
+                    TxtError.Text = "Vui lòng chọn ngày!";
                     return;
                 }
                 budgetService.AllocateExpense(budget.BudgetId, txCat.CategoryId, amountNum, DateOnly.FromDateTime(DpDate.SelectedDate.Value), TxtNote.Text.Trim(), userId);

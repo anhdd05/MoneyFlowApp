@@ -85,9 +85,9 @@ public partial class MainWindow : Window
 
     private void BtnAddBudget_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new BudgetWindow(null, userId, currentMonth, currentYear, budgetService);
-        dialog.Owner = this;
-        dialog.ShowDialog();
+        var popup = new BudgetWindow(null, userId, currentMonth, currentYear, budgetService);
+        popup.Owner = this;
+        popup.Show();
         LoadAll();
     }
 
@@ -105,9 +105,9 @@ public partial class MainWindow : Window
         Budget? budget = budgetService.GetById(budgetId);
         if (budget == null) return;
 
-        var dialog = new BudgetWindow(budget, userId, currentMonth, currentYear, budgetService);
-        dialog.Owner = this;
-        dialog.ShowDialog();
+        var popup = new BudgetWindow(budget, userId, currentMonth, currentYear, budgetService);
+        popup.Owner = this;
+        popup.Show();
         LoadAll();
     }
 
@@ -118,18 +118,11 @@ public partial class MainWindow : Window
             MessageBox.Show("Vui lòng chọn một ngân sách để xóa.");
             return;
         }
-
-        var result = MessageBox.Show(
-            "Bạn có chắc muốn xóa ngân sách này?",
-            "Xác nhận xóa",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Warning);
+        var result = MessageBox.Show("Bạn có muốn xóa ngân sách này?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
         if (result != MessageBoxResult.Yes) return;
-
         dynamic selected = BudgetGrid.SelectedItem;
         int budgetId = (int)selected.BudgetId;
-
         budgetService.DeleteBudget(budgetId);
         LoadAll();
     }
@@ -147,20 +140,19 @@ public partial class MainWindow : Window
 
         Budget? budget = budgetService.GetById(budgetId);
         if (budget == null) return;
-
         decimal balance = budgetService.GetBalance(userId, currentMonth, currentYear);
 
-        var dialog = new AllocateWindow(budget, userId, budgetService, balance);
-        dialog.Owner = this;
-        dialog.ShowDialog();
+        var popup = new AllocateWindow(budget, userId, budgetService, balance);
+        popup.Owner = this;
+        popup.Show();
         LoadAll();
     }
 
     private void BtnAddTransaction_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new TransactionWindow(userId, transactionService);
-        dialog.Owner = this;
-        dialog.ShowDialog();
+        var popup = new TransactionWindow(userId, transactionService);
+        popup.Owner = this;
+        popup.Show();
         LoadAll();
     }
 
@@ -171,15 +163,8 @@ public partial class MainWindow : Window
             MessageBox.Show("Vui lòng chọn một giao dịch để xóa.");
             return;
         }
-
-        var result = MessageBox.Show(
-            "Bạn có chắc muốn xóa giao dịch này?",
-            "Xác nhận xóa",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Warning);
-
+        var result = MessageBox.Show("Bạn có muốn xóa giao dịch này?","Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
         if (result != MessageBoxResult.Yes) return;
-
         transactionService.DeleteTransaction(tx.TransactionId);
         LoadAll();
     }

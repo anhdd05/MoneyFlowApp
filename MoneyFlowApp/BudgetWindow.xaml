@@ -21,46 +21,25 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Tiêu đề -->
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
-                   x:Name="TxtTitle" FontSize="15" FontWeight="Bold"
-                   Margin="0,0,0,16"/>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" x:Name="TxtTitle" FontSize="15" FontWeight="Bold" Margin="0,0,0,16"/>
 
-        <!-- Danh mục -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Danh mục:"
-                   VerticalAlignment="Center" Margin="0,0,0,10"/>
-        <ComboBox  Grid.Row="1" Grid.Column="1" x:Name="CboCategory"
-                   DisplayMemberPath="Name" Height="28" Margin="0,0,0,10"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Danh mục:" VerticalAlignment="Center" Margin="0,0,0,10"/>
+        <ComboBox  Grid.Row="1" Grid.Column="1" x:Name="CboCategory" DisplayMemberPath="Name" Height="28" Margin="0,0,0,10"/>
 
-        <!-- Hạn mức -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Hạn mức (₫):"
-                   VerticalAlignment="Center" Margin="0,0,0,10"/>
-        <TextBox   Grid.Row="2" Grid.Column="1" x:Name="TxtAmount"
-                   Height="28" Margin="0,0,0,10"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Hạn mức (₫):" VerticalAlignment="Center" Margin="0,0,0,10"/>
+        <TextBox   Grid.Row="2" Grid.Column="1" x:Name="TxtAmount" Height="28" Margin="0,0,0,10"/>
 
-        <!-- Mô tả -->
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Mô tả:"
-                   VerticalAlignment="Center" Margin="0,0,0,10"/>
-        <TextBox   Grid.Row="3" Grid.Column="1" x:Name="TxtDescription"
-                   Height="28" Margin="0,0,0,10"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Mô tả:" VerticalAlignment="Center" Margin="0,0,0,10"/>
+        <TextBox   Grid.Row="3" Grid.Column="1" x:Name="TxtDescription" Height="28" Margin="0,0,0,10"/>
 
-        <!-- Tự gia hạn -->
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Tự gia hạn:"
-                   VerticalAlignment="Center" Margin="0,0,0,16"/>
-        <CheckBox  Grid.Row="4" Grid.Column="1" x:Name="ChkAutoRenew"
-                   VerticalAlignment="Center" Margin="0,0,0,16"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Tự gia hạn:" VerticalAlignment="Center" Margin="0,0,0,16"/>
+        <CheckBox  Grid.Row="4" Grid.Column="1" x:Name="ChkAutoRenew" VerticalAlignment="Center" Margin="0,0,0,16"/>
 
-        <!-- Lỗi -->
-        <TextBlock Grid.Row="5" Grid.ColumnSpan="2" x:Name="TxtError"
-                   Foreground="Red" TextWrapping="Wrap" Margin="0,0,0,10"/>
+        <TextBlock Grid.Row="5" Grid.ColumnSpan="2" x:Name="TxtError" Foreground="Red" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
-        <!-- Nút -->
-        <StackPanel Grid.Row="6" Grid.ColumnSpan="2"
-                    Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Lưu" Width="80" Height="30"
-                    Click="BtnSave_Click" Margin="0,0,8,0"/>
-            <Button Content="Hủy" Width="80" Height="30"
-                    Click="BtnCancel_Click"/>
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Lưu" Width="80" Height="30" Click="BtnSave_Click" Margin="0,0,8,0"/>
+            <Button Content="Hủy" Width="80" Height="30" Click="BtnCancel_Click"/>
         </StackPanel>
     </Grid>
 </Window>
