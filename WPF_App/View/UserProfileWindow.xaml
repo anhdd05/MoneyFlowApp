@@ -1,0 +1,89 @@
+﻿<Window x:Class="WPF_App.View.UserProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_App.View"
+        mc:Ignorable="d"
+        Title="User Profile" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Border Background="White" Padding="40"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="380">
+            <StackPanel>
+
+                <!-- TIÊU ĐỀ -->
+                <TextBlock x:Name="lblTitle"
+                           Text="Hồ sơ cá nhân"
+                           FontSize="22" FontWeight="Bold"
+                           Foreground="#111827"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,24"/>
+
+                <!-- ══ VIEW MODE ══ -->
+                <StackPanel x:Name="pnlView">
+
+                    <TextBlock Text="Họ và tên" FontWeight="SemiBold"
+                               Foreground="#6B7280" Margin="0,0,0,2"/>
+                    <TextBlock x:Name="lblName" FontSize="15"
+                               Foreground="#111827" Margin="0,0,0,14"/>
+
+                    <TextBlock Text="Email" FontWeight="SemiBold"
+                               Foreground="#6B7280" Margin="0,0,0,2"/>
+                    <TextBlock x:Name="lblEmail" FontSize="15"
+                               Foreground="#111827" Margin="0,0,0,14"/>
+
+                    <TextBlock Text="Vai trò" FontWeight="SemiBold"
+                               Foreground="#6B7280" Margin="0,0,0,2"/>
+                    <TextBlock x:Name="lblRole" FontSize="15"
+                               Foreground="#111827" Margin="0,0,0,14"/>
+
+                    <TextBlock Text="Ngày tạo tài khoản" FontWeight="SemiBold"
+                               Foreground="#6B7280" Margin="0,0,0,2"/>
+                    <TextBlock x:Name="lblCreatedAt" FontSize="15"
+                               Foreground="#111827" Margin="0,0,0,28"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="✏️  Chỉnh sửa"
+                                Padding="18,10" Margin="0,0,12,0"
+                                Background="#6366F1" Foreground="White"
+                                BorderThickness="0" Cursor="Hand"
+                                Click="BtnEdit_Click"/>
+                        <Button Content="🚪  Đăng xuất"
+                                Padding="18,10"
+                                Background="#EF4444" Foreground="White"
+                                BorderThickness="0" Cursor="Hand"
+                                Click="BtnLogout_Click"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- ══ EDIT MODE ══ -->
+                <StackPanel x:Name="pnlEdit" Visibility="Collapsed">
+
+                    <TextBlock Text="Họ và tên *" FontWeight="SemiBold"
+                               Foreground="#6B7280" Margin="0,0,0,4"/>
+                    <TextBox x:Name="txtName" Padding="8,7"
+                             BorderBrush="#D1D5DB" BorderThickness="1"
+                             Margin="0,0,0,28"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="💾  Lưu thay đổi"
+                                Padding="18,10" Margin="0,0,12,0"
+                                Background="#10B981" Foreground="White"
+                                BorderThickness="0" Cursor="Hand"
+                                Click="BtnSave_Click"/>
+                        <Button Content="✖  Hủy"
+                                Padding="18,10"
+                                Background="#9CA3AF" Foreground="White"
+                                BorderThickness="0" Cursor="Hand"
+                                Click="BtnCancel_Click"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
