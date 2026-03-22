@@ -156,6 +156,13 @@ public partial class MainWindow : Window
         LoadAll();
     }
 
+    private void BtnReport_Click(object sender, RoutedEventArgs e)
+    {
+        var reportWindow = new ReportWindow(userId);
+        reportWindow.Owner = this;
+        reportWindow.Show();
+    }
+
     private void BtnDeleteTransaction_Click(object sender, RoutedEventArgs e)
     {
         if (TransactionGrid.SelectedItem is not Transaction tx)

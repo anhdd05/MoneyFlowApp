@@ -17,5 +17,7 @@ namespace Repositories
 
         decimal SumIncome(int userId);
         decimal SumExpense(int userId);
+
+        List<Transaction> getByDateRange(int userId, DateTime from, DateTime to);
     }
 }

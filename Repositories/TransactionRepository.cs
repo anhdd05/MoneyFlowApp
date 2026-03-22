@@ -53,5 +53,17 @@ namespace Repositories
                 .Where(t => t.UserId == userId && t.Category != null && t.Category.Type!.ToLower() == "income")
                 .Sum(t => t.Amount);
         }
+
+        public List<Transaction> getByDateRange(int userId, DateTime startDate, DateTime endDate)
+        {
+            DateOnly from = DateOnly.FromDateTime(startDate);
+            DateOnly to = DateOnly.FromDateTime(endDate);
+
+            return db.Transactions
+                .Include(t => t.Category)
+                .Where(t => t.UserId == userId && t.Date >= from && t.Date <= to)
+                .OrderBy(t => t.Date)
+                .ToList();
+        }
     }
 }
