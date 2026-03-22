@@ -31,13 +31,13 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="16">
 
-                <!-- BIỂU ĐỒ 1: TRÒN -->
+                <!-- BIỂU ĐỒ TRÒN -->
                 <TextBlock Text="Tỉ lệ danh mục" FontSize="14" FontWeight="Bold" Margin="0,0,0,8"/>
                 <Border BorderBrush="#DDDDDD" BorderThickness="1" Margin="0,0,0,24">
                     <Canvas x:Name="PieChart" Height="260" Background="White"/>
                 </Border>
 
-                <!-- BIỂU ĐỒ 2: CỘT -->
+                <!-- BIỂU ĐỒ CỘT -->
                 <TextBlock Text="Thu vs Chi theo tháng" FontSize="14" FontWeight="Bold" Margin="0,0,0,8"/>
                 <Border BorderBrush="#DDDDDD" BorderThickness="1" Margin="0,0,0,24">
                     <Canvas x:Name="BarChart" Height="220" Background="White"/>
