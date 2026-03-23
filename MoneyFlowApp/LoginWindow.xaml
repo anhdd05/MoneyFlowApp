@@ -1,0 +1,70 @@
+﻿<Window x:Class="MoneyFlowApp.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MoneyFlowApp"
+        mc:Ignorable="d"
+        Title="MoneyFlow - Tài khoản" Height="600" Width="400" WindowStartupLocation="CenterScreen">
+
+    <Grid Background="#F4F4F4">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+            <TextBlock Text="MONEY FLOW" FontSize="28" FontWeight="Bold" Foreground="#2C3E50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Name="txtTitle" Text="Hệ thống quản lý tài chính" FontSize="14" Foreground="#7F8C8D" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+            <TextBlock Text="Email" FontWeight="SemiBold" Foreground="#34495E" Margin="0,5,0,5"/>
+            <Border BorderBrush="#BDC3C7" BorderThickness="1" CornerRadius="5" Background="White">
+                <TextBox Name="txtEmail" Height="35" BorderThickness="0" Padding="5,7,5,5" VerticalContentAlignment="Center" Text="admin@gmail.com"/>
+            </Border>
+
+            <StackPanel Name="panelUsername" Visibility="Collapsed">
+                <TextBlock Text="Họ và tên" FontWeight="SemiBold" Foreground="#34495E" Margin="0,15,0,5"/>
+                <Border BorderBrush="#BDC3C7" BorderThickness="1" CornerRadius="5" Background="White">
+                    <TextBox Name="txtUsername" Height="35" BorderThickness="0" Padding="5,7,5,5" VerticalContentAlignment="Center"/>
+                </Border>
+            </StackPanel>
+
+            <TextBlock Name="lblPassword" Text="Mật khẩu" FontWeight="SemiBold" Foreground="#34495E" Margin="0,15,0,5"/>
+            <Border BorderBrush="#BDC3C7" BorderThickness="1" CornerRadius="5" Background="White">
+                <PasswordBox Name="txtPassword" Height="35" BorderThickness="0" Padding="5,7,5,5" VerticalContentAlignment="Center"/>
+            </Border>
+
+            <StackPanel Name="panelToken" Visibility="Collapsed">
+                <TextBlock Text="Mã xác nhận (Token)" FontWeight="SemiBold" Foreground="#E67E22" Margin="0,15,0,5"/>
+                <Border BorderBrush="#BDC3C7" BorderThickness="1" CornerRadius="5" Background="White">
+                    <TextBox Name="txtToken" Height="35" BorderThickness="0" Padding="5,7,5,5" VerticalContentAlignment="Center"/>
+                </Border>
+            </StackPanel>
+
+            <TextBlock Name="txtMessage" Foreground="#E74C3C" Margin="0,15,0,0" FontWeight="Medium" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
+
+            <Button Name="btnMainAction" Content="ĐĂNG NHẬP" Height="40" Margin="0,20,0,10" 
+                    Background="#3498DB" Foreground="White" FontWeight="Bold" Cursor="Hand"
+                    Click="btnLogin_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Grid Margin="0,10,0,0">
+                <Button Name="btnForgotPassword" Content="Quên mật khẩu?" Background="Transparent" BorderThickness="0" 
+                        Foreground="#2980B9" Cursor="Hand" HorizontalAlignment="Left" Click="btnForgotPassword_Click"/>
+                <Button Name="btnRegister" Content="Đăng ký tài khoản" Background="Transparent" BorderThickness="0" 
+                        Foreground="#27AE60" Cursor="Hand" HorizontalAlignment="Right" Click="btnRegister_Click"/>
+            </Grid>
+
+            <Button Name="btnBackToLogin" Content="Quay lại Đăng nhập" Visibility="Collapsed" Margin="0,15,0,0" 
+                    Background="Transparent" BorderThickness="0" Foreground="#7F8C8D" Click="btnBackToLogin_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
