@@ -1,4 +1,4 @@
-﻿using BusinessObjects;
+using BusinessObjects;
 using Service;
 using System.Windows;
 using System.Windows.Media;

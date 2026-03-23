@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessObjects;
@@ -27,4 +27,10 @@ public class User
 
     [Column("created_at", TypeName = "datetime")]
     public DateTime? CreatedAt { get; set; }
+
+    [Column("last_active", TypeName = "datetime")]
+    public DateTime? LastLoginAt { get; set; }
+
+    [Column("is_banned")]
+    public bool IsBanned { get; set; }
 }

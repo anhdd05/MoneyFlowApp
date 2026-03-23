@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessObjects;
@@ -19,6 +19,10 @@ public class BudgetCategory
 
     [Column("icon")]
     public string? Icon { get; set; }
+
+    [Column("color")]
+    [StringLength(20)]
+    public string? Color { get; set; }
 
     [Column("is_deleted")]
     public bool? IsDeleted { get; set; }
