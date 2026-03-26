@@ -91,6 +91,11 @@ public partial class MainWindow : Window
         LoadAll();
     }
 
+    private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+    {
+        LoadAll();
+    }
+
     private void BtnEditBudget_Click(object sender, RoutedEventArgs e)
     {
         if (BudgetGrid.SelectedItem == null)
@@ -163,16 +168,4 @@ public partial class MainWindow : Window
         reportWindow.Show();
     }
 
-    private void BtnDeleteTransaction_Click(object sender, RoutedEventArgs e)
-    {
-        if (TransactionGrid.SelectedItem is not Transaction tx)
-        {
-            MessageBox.Show("Vui lòng chọn một giao dịch để xóa.");
-            return;
-        }
-        var result = MessageBox.Show("Bạn có muốn xóa giao dịch này?","Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-        if (result != MessageBoxResult.Yes) return;
-        transactionService.DeleteTransaction(tx.TransactionId);
-        LoadAll();
-    }
 }
