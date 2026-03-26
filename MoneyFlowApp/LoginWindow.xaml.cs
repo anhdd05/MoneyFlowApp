@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
-using System.Text.RegularExpressions; // Thư viện cần thiết để dùng Regex
+using System.Text.RegularExpressions;
 using Services;
 using BusinessObjects;
 
@@ -23,7 +23,7 @@ namespace MoneyFlowApp
 
             try
             {
-                // 1. Kiểm tra trống (Cho tất cả các chế độ)
+                // 1. Kiểm tra trống đầu vào
                 if (string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPassword.Password))
                 {
                     throw new Exception("Vui lòng nhập đầy đủ Email và Mật khẩu!");
@@ -40,39 +40,56 @@ namespace MoneyFlowApp
                 {
                     var user = _userService.Login(txtEmail.Text, txtPassword.Password);
 
-                    MessageBox.Show($"Đăng nhập thành công! Chào {user.Email}", "Thông báo");
+                    if (user != null)
+                    {
+                        // --- LOGIC PHÂN QUYỀN VÀ HIỆN LỜI CHÀO ---
 
-                    ChangePasswordWindow changeWin = new ChangePasswordWindow(user.Email);
-                    this.Hide();
+                        // Ưu tiên hiện FullName, nếu trống thì hiện Email
+                        string displayName = !string.IsNullOrEmpty(user.FullName) ? user.FullName : user.Email;
 
-                    changeWin.ShowDialog();
+                        // Check Role từ Database (không phân biệt hoa thường)
+                        if (user.Role != null && user.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show($"Đăng nhập thành công! Chào Admin: {displayName}.", "Thông báo");
 
-                    this.Show();
-                    txtPassword.Password = "";
-                    txtMessage.Text = "Vui lòng đăng nhập lại với mật khẩu mới.";
+                            AdminDashboard adminWin = new AdminDashboard();
+                            adminWin.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Đăng nhập thành công! Chào mừng {displayName} quay trở lại.", "Thông báo");
+
+                            // Truyền UserId vào MainWindow để lọc dữ liệu
+                            MainWindow mainWin = new MainWindow(user.UserId);
+                            mainWin.Show();
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Email hoặc mật khẩu không chính xác!");
+                    }
                 }
                 else if (mode == "XÁC NHẬN ĐĂNG KÝ")
                 {
-                   
+                    // Đăng ký tài khoản mới với Username (FullName)
                     _userService.Register(txtUsername.Text, txtEmail.Text, txtPassword.Password);
-
                     MessageBox.Show("Đăng ký thành công! Hãy đăng nhập lại bằng tài khoản mới.", "Thành công");
                     btnBackToLogin_Click(null, null);
                 }
                 else if (mode == "ĐẶT LẠI MẬT KHẨU")
                 {
                     if (string.IsNullOrEmpty(txtToken.Text)) throw new Exception("Vui lòng nhập mã Token từ Email!");
-
                     _userService.ResetPassword(txtEmail.Text, txtToken.Text, txtPassword.Password);
-
                     MessageBox.Show("Đổi mật khẩu thành công! Hãy đăng nhập lại.", "Thông báo");
                     btnBackToLogin_Click(null, null);
                 }
             }
             catch (Exception ex)
             {
+                // Hiện lỗi SQL hoặc lỗi logic ra màn hình
                 txtMessage.Text = ex.Message;
-                // Tô đỏ thông báo lỗi cho dễ nhìn
                 txtMessage.Foreground = Brushes.Red;
             }
         }
@@ -88,7 +105,6 @@ namespace MoneyFlowApp
                     return;
                 }
 
-                // Kiểm tra định dạng email cả khi bấm quên mật khẩu
                 string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
                 if (!Regex.IsMatch(txtEmail.Text, emailPattern))
                 {

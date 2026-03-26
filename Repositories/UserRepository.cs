@@ -30,7 +30,11 @@ public class UserRepository : IUserRepository
         db.Users.Update(user);
         db.SaveChanges();
     }
-
+    public List<User> GetAll()
+    {
+        using var db = new AppDbContext(); // Lưu ý: Chỗ này dùng đúng tên DbContext của nhóm ông
+        return db.Users.ToList();
+    }
     public User? GetByResetToken(string token)
     {
         using var db = new AppDbContext();

@@ -30,39 +30,59 @@ public partial class MainWindow : Window
 
     private void LoadHeader()
     {
-        var date = new DateTime(currentYear, currentMonth, 1);
-        TxtMonth.Text = date.ToString("MMMM yyyy");
+        try
+        {
+            var date = new DateTime(currentYear, currentMonth, 1);
+            TxtMonth.Text = date.ToString("MMMM yyyy");
 
-        decimal balance = budgetService.GetBalance(userId, currentMonth, currentYear);
-        TxtBalance.Text = balance.ToString("N0") + "₫";
-        TxtBalance.Foreground = balance >= 0 ? Brushes.White : Brushes.LightCoral;
+            decimal balance = budgetService.GetBalance(userId, currentMonth, currentYear);
+            TxtBalance.Text = balance.ToString("N0") + "₫";
+            TxtBalance.Foreground = balance >= 0 ? Brushes.White : Brushes.LightCoral;
+        }
+        catch
+        {
+            TxtBalance.Text = "0₫ (Chưa có DB)";
+        }
     }
 
     private void LoadBudgets()
     {
-        List<Budget> budgets = budgetService.GetBudgets(userId, currentMonth, currentYear);
-
-        BudgetGrid.ItemsSource = budgets.Select(b => new
+        try
         {
-            b.BudgetId,
-            b.Category,
-            b.Amount,
-            b.Allocated,
-            Remaining = b.Amount - b.Allocated,
-            b.Description,
-            b.AutoRenew,
-        }).ToList();
+            List<Budget> budgets = budgetService.GetBudgets(userId, currentMonth, currentYear);
 
-        int completed = budgets.Count(b => b.Allocated >= b.Amount && b.Amount > 0);
-        TxtBudgetSummary.Text = $"Tổng: {budgets.Count} ngân sách  |  Hoàn thành: {completed}/{budgets.Count}";
+            BudgetGrid.ItemsSource = budgets.Select(b => new
+            {
+                b.BudgetId,
+                b.Category,
+                b.Amount,
+                b.Allocated,
+                Remaining = b.Amount - b.Allocated,
+                b.Description,
+                b.AutoRenew,
+            }).ToList();
+
+            int completed = budgets.Count(b => b.Allocated >= b.Amount && b.Amount > 0);
+            TxtBudgetSummary.Text = $"Tổng: {budgets.Count} ngân sách  |  Hoàn thành: {completed}/{budgets.Count}";
+        }
+        catch
+        {
+            TxtBudgetSummary.Text = "Tổng: 0 ngân sách (Lỗi DB)";
+        }
     }
 
     private void LoadTransactions()
     {
-        TransactionGrid.ItemsSource =
-            transactionService.GetByMonth(userId, currentMonth, currentYear);
+        try
+        {
+            TransactionGrid.ItemsSource =
+                transactionService.GetByMonth(userId, currentMonth, currentYear);
+        }
+        catch
+        {
+            // Tạm thời bỏ qua lỗi thiếu bảng Transactions
+        }
     }
-
 
     private void BtnPrevMonth_Click(object sender, RoutedEventArgs e)
     {

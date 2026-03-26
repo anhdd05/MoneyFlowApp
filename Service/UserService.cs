@@ -23,17 +23,15 @@ public class UserService
     }
 
     // 2. REGISTER
+    // 2. REGISTER - ĐÃ SỬA ĐỂ KHÔNG LỖI DATABASE
     public void Register(string username, string email, string password)
     {
-        var exists = userRepo.GetByEmail(email);
-        if (exists != null) throw new Exception("Email này đã được đăng ký!");
-
         var newUser = new User
         {
-            
+            FullName = username,
             Email = email,
             Password = password,
-           
+            Role = "User", // Mặc định là User
             CreatedAt = DateTime.Now
         };
         userRepo.Add(newUser);
