@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using System.Text.RegularExpressions; // Thư viện cần thiết để dùng Regex
 using Services;
 using BusinessObjects;
 
@@ -22,34 +23,37 @@ namespace MoneyFlowApp
 
             try
             {
+                // 1. Kiểm tra trống (Cho tất cả các chế độ)
+                if (string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPassword.Password))
+                {
+                    throw new Exception("Vui lòng nhập đầy đủ Email và Mật khẩu!");
+                }
+
+                // 2. Kiểm tra định dạng Email bằng Regex
+                string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                if (!Regex.IsMatch(txtEmail.Text, emailPattern))
+                {
+                    throw new Exception("Định dạng Email không hợp lệ (ví dụ: abc@gmail.com)!");
+                }
+
                 if (mode == "ĐĂNG NHẬP")
                 {
-                    if (string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPassword.Password))
-                        throw new Exception("Vui lòng nhập đầy đủ Email và Mật khẩu!");
-
                     var user = _userService.Login(txtEmail.Text, txtPassword.Password);
 
-                    MessageBox.Show($"Đăng nhập thành công! Chào {user.UserName}", "Thông báo");
+                    MessageBox.Show($"Đăng nhập thành công! Chào {user.Email}", "Thông báo");
 
-                    // --- SỬA ĐỂ KHÔNG BỊ CRASH ---
                     ChangePasswordWindow changeWin = new ChangePasswordWindow(user.Email);
+                    this.Hide();
 
-                    this.Hide(); // Ẩn màn hình Login đi (để App không bị đóng)
+                    changeWin.ShowDialog();
 
-                    changeWin.ShowDialog(); // Mở màn hình đổi pass theo dạng hội thoại (chờ đổi xong mới chạy tiếp)
-
-                    // Sau khi đổi pass xong và đóng ChangePasswordWindow, code sẽ chạy đến đây:
-                    this.Show(); // Hiện lại màn hình Login
-                    txtPassword.Password = ""; // Xóa pass cũ đi cho an toàn
+                    this.Show();
+                    txtPassword.Password = "";
                     txtMessage.Text = "Vui lòng đăng nhập lại với mật khẩu mới.";
-                    // -----------------------------
                 }
                 else if (mode == "XÁC NHẬN ĐĂNG KÝ")
                 {
-                    if (string.IsNullOrEmpty(txtUsername.Text)) throw new Exception("Vui lòng nhập họ tên!");
-                    if (string.IsNullOrEmpty(txtEmail.Text)) throw new Exception("Vui lòng nhập Email!");
-                    if (string.IsNullOrEmpty(txtPassword.Password)) throw new Exception("Vui lòng nhập mật khẩu!");
-
+                   
                     _userService.Register(txtUsername.Text, txtEmail.Text, txtPassword.Password);
 
                     MessageBox.Show("Đăng ký thành công! Hãy đăng nhập lại bằng tài khoản mới.", "Thành công");
@@ -58,7 +62,6 @@ namespace MoneyFlowApp
                 else if (mode == "ĐẶT LẠI MẬT KHẨU")
                 {
                     if (string.IsNullOrEmpty(txtToken.Text)) throw new Exception("Vui lòng nhập mã Token từ Email!");
-                    if (string.IsNullOrEmpty(txtPassword.Password)) throw new Exception("Vui lòng nhập mật khẩu mới!");
 
                     _userService.ResetPassword(txtEmail.Text, txtToken.Text, txtPassword.Password);
 
@@ -69,6 +72,8 @@ namespace MoneyFlowApp
             catch (Exception ex)
             {
                 txtMessage.Text = ex.Message;
+                // Tô đỏ thông báo lỗi cho dễ nhìn
+                txtMessage.Foreground = Brushes.Red;
             }
         }
 
@@ -79,7 +84,15 @@ namespace MoneyFlowApp
                 if (string.IsNullOrEmpty(txtEmail.Text))
                 {
                     txtMessage.Text = "Nhập Email trước khi bấm Quên mật khẩu!";
+                    txtMessage.Foreground = Brushes.OrangeRed;
                     return;
+                }
+
+                // Kiểm tra định dạng email cả khi bấm quên mật khẩu
+                string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                if (!Regex.IsMatch(txtEmail.Text, emailPattern))
+                {
+                    throw new Exception("Vui lòng nhập đúng định dạng Email để nhận mã!");
                 }
 
                 txtTitle.Text = "Khôi phục mật khẩu";
@@ -96,6 +109,7 @@ namespace MoneyFlowApp
             catch (Exception ex)
             {
                 txtMessage.Text = ex.Message;
+                txtMessage.Foreground = Brushes.Red;
             }
         }
 

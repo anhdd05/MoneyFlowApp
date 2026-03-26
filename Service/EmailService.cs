@@ -1,12 +1,11 @@
 ﻿using MailKit.Net.Smtp;
-using Microsoft.Extensions.Configuration; // Có thể giữ hoặc xóa nếu không dùng
+using Microsoft.Extensions.Configuration; 
 using MimeKit;
 
 namespace Services;
 
 public class EmailService
 {
-    // SỬA TẠI ĐÂY: Xóa (IConfiguration config) để UserService gọi được bằng new EmailService()
     public EmailService() { }
 
     public async Task<bool> SendEmail(string toEmail, string subject, string body)

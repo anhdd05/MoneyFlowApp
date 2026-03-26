@@ -30,10 +30,10 @@ public class UserService
 
         var newUser = new User
         {
-            UserName = username,
+            
             Email = email,
             Password = password,
-            Role = "User",
+           
             CreatedAt = DateTime.Now
         };
         userRepo.Add(newUser);
