@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using BusinessObject.Models;
+using Microsoft.Extensions.Configuration;
 namespace DataAccessLayer;
 
 public partial class AppDbContext : DbContext
@@ -29,10 +30,12 @@ public partial class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer("Data Source=LAPTOP-CTE7QML5\\SQLEXPRESS;Initial Catalog=ExpenseManagement;User ID=sa;Password=123456;Encrypt=True;Trust Server Certificate=True");
-        }
+        var config = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
