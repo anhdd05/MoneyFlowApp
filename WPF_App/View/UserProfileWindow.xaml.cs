@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Services;
+﻿using BusinessObject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-
-namespace WPF_App.View
+using Services;
+namespace MoneyFlowApp.View
 {
     /// <summary>
     /// Interaction logic for Window1.xaml

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccessLayer.Models;
+namespace BusinessObject.Models;
 
-public partial class BudgetCategory
+public partial class TransactionCategory
 {
     public int CategoryId { get; set; }
 
@@ -15,5 +15,5 @@ public partial class BudgetCategory
 
     public bool? IsDeleted { get; set; }
 
-    public virtual ICollection<Budget> Budgets { get; set; } = new List<Budget>();
+    public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 }

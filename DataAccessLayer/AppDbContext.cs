@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using BusinessObject.Models;
+namespace DataAccessLayer;
 
-namespace DataAccessLayer.Models;
-
-public partial class ExpenseManagementContext : DbContext
+public partial class AppDbContext : DbContext
 {
-    public ExpenseManagementContext()
+    public AppDbContext()
     {
     }
 
-    public ExpenseManagementContext(DbContextOptions<ExpenseManagementContext> options)
+    public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
     }

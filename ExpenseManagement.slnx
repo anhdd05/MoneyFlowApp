@@ -1,5 +1,7 @@
 <Solution>
-  <Project Path="BusinessLogicLayer/BusinessLogicLayer.csproj" />
+  <Project Path="BusinessLogicLayer/Services.csproj" />
+  <Project Path="BusinessObject/BusinessObject.csproj" Id="6203fba6-a576-4f02-aecc-40fd4749deab" />
   <Project Path="DataAccessLayer/DataAccessLayer.csproj" />
-  <Project Path="WPF_App/WPF_App.csproj" />
+  <Project Path="Repositories/Repositories.csproj" Id="aaf3807a-6985-41a9-a80d-e202efc131ec" />
+  <Project Path="WPF_App/MoneyFlowApp.csproj" />
 </Solution>

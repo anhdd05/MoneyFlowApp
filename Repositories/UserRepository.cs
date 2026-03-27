@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAccessLayer.Models;
-namespace DataAccessLayer.Repositories
+using BusinessObject.Models;
+
+using DataAccessLayer;
+namespace Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -14,13 +16,13 @@ namespace DataAccessLayer.Repositories
         private UserRepository() { }
         public User? GetById(int id)
         {
-            using var ctx = new ExpenseManagementContext();
+            using var ctx = new AppDbContext();
             return ctx.Users.Find(id);
         }
 
         public void Update(User user)
         {
-            using var ctx = new ExpenseManagementContext();
+            using var ctx = new AppDbContext();
             ctx.Users.Update(user);
             ctx.SaveChanges();
         }

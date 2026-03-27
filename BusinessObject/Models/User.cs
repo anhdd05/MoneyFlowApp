@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccessLayer.Models;
+namespace BusinessObject.Models;
 
-public partial class User
+public class User
 {
     public int UserId { get; set; }
 
