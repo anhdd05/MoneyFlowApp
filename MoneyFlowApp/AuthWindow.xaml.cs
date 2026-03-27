@@ -5,7 +5,8 @@ using System.Windows.Media;
 
 namespace MoneyFlowApp;
 
-public partial class MainWindow : Window
+
+public partial class AuthWindow : Window
 {
     private readonly BudgetService budgetService = new BudgetService();
     private readonly TransactionService transactionService = new TransactionService();
@@ -14,7 +15,8 @@ public partial class MainWindow : Window
     private int currentMonth = DateTime.Today.Month;
     private int currentYear = DateTime.Today.Year;
 
-    public MainWindow(int userId)
+
+    public AuthWindow(int userId)
     {
         InitializeComponent();
         this.userId = userId;
@@ -183,7 +185,7 @@ public partial class MainWindow : Window
             MessageBox.Show("Vui lòng chọn một giao dịch để xóa.");
             return;
         }
-        var result = MessageBox.Show("Bạn có muốn xóa giao dịch này?","Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        var result = MessageBox.Show("Bạn có muốn xóa giao dịch này?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
         if (result != MessageBoxResult.Yes) return;
         transactionService.DeleteTransaction(tx.TransactionId);
         LoadAll();

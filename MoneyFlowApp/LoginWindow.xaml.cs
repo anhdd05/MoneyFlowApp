@@ -60,9 +60,9 @@ namespace MoneyFlowApp
                         {
                             MessageBox.Show($"Đăng nhập thành công! Chào mừng {displayName} quay trở lại.", "Thông báo");
 
-                            // Truyền UserId vào MainWindow để lọc dữ liệu
-                            MainWindow mainWin = new MainWindow(user.UserId);
-                            mainWin.Show();
+                           
+                            AuthWindow auth = new AuthWindow(user.UserId);
+                            auth.Show();
                             this.Close();
                         }
                     }
@@ -153,4 +153,4 @@ namespace MoneyFlowApp
             txtMessage.Text = "";
         }
     }
-}
+}   
