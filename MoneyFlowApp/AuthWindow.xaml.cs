@@ -2,7 +2,7 @@
 using Service;
 using System.Windows;
 using System.Windows.Media;
-using Service;
+
 namespace MoneyFlowApp;
 
 

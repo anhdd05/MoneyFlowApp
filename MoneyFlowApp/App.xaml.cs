@@ -1,5 +1,3 @@
-﻿using System.Configuration;
-using System.Data;
 using System.Windows;
 
 namespace MoneyFlowApp
@@ -16,6 +14,4 @@ namespace MoneyFlowApp
             loginWin.Show();
         }
     }
-
-
 }

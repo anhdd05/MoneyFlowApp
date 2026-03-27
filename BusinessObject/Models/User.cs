@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessObject.Models;
 
@@ -27,4 +28,9 @@ public class User
     public string? FullName { get; set; }
     public DateTime? ResetTokenExpiry { get; set; }
     public string? ResetToken { get; set; }
+    [Column("last_active", TypeName = "datetime")]
+    public DateTime? LastLoginAt { get; set; }
+
+    [Column("is_banned")]
+    public bool IsBanned { get; set; }
 }

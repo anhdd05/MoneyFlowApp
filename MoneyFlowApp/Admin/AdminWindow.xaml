@@ -1,0 +1,29 @@
+<Window x:Class="MoneyFlowApp.Admin.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MoneyFlowApp.Admin"
+        Title="Quản trị Hệ thống - MoneyFlow" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#1565C0" Padding="16,12">
+            <TextBlock Text="Khu vực Quản trị (Admin Workspace)" FontSize="18" FontWeight="Bold" Foreground="White"/>
+        </Border>
+
+        <TabControl Grid.Row="1" Margin="8" x:Name="AdminTabControl" SelectionChanged="AdminTabControl_SelectionChanged">
+            <TabItem Header="Tổng quan">
+                <local:AdminDashboardControl x:Name="AdminDashboard"/>
+            </TabItem>
+            <TabItem Header="Danh mục Hệ thống">
+                <local:AdminCategoryControl x:Name="AdminCategory"/>
+            </TabItem>
+            <TabItem Header="Quản lý Người dùng">
+                <local:AdminUserControl x:Name="AdminUser"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

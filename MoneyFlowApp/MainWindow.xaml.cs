@@ -1,4 +1,4 @@
-﻿using BusinessObject.Models;
+using BusinessObject.Models;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,27 +11,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MoneyFlowApp.View;
 
-namespace MoneyFlowApp
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-            SessionManager.CurrentUser = new User
-            {
-                UserId = 1,
-                UserName = "Nguyễn Sinh Hùng",
-                Email = "nsh@gmail.com",
-                Role = "user",
-                CreatedAt = DateTime.Now
-            };
+namespace MoneyFlowApp;
 
-            new UserProfileWindow().Show();
-            this.Close();
-        }
+public partial class MainWindow : Window
+{
+   
+
+    public MainWindow()
+    {
+        InitializeComponent();
+        
+        
     }
+
+    
 }

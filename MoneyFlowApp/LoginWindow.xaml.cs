@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessObject.Models;
+using MoneyFlowApp.Admin;
+using Service;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Service;
+
 namespace MoneyFlowApp
 {
     /// <summary>
@@ -63,7 +58,7 @@ namespace MoneyFlowApp
                         {
                             MessageBox.Show($"Đăng nhập thành công! Chào Admin: {displayName}.", "Thông báo");
 
-                            AdminDashboard adminWin = new AdminDashboard();
+                            AdminWindow adminWin = new AdminWindow();
                             adminWin.Show();
                             this.Close();
                         }
