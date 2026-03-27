@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace MoneyFlowApp;
 
-public partial class MainWindow : Window
+public partial class ManageBudgetWindow : Window
 {
     private readonly BudgetService budgetService = new BudgetService();
     private readonly TransactionService transactionService = new TransactionService();
@@ -14,7 +14,7 @@ public partial class MainWindow : Window
     private int currentMonth = DateTime.Today.Month;
     private int currentYear = DateTime.Today.Year;
 
-    public MainWindow(int userId)
+    public ManageBudgetWindow(int userId)
     {
         InitializeComponent();
         this.userId = userId;

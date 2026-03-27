@@ -16,7 +16,7 @@ namespace MoneyFlowApp
             // obtain userId (login, config, args, etc.)
             int userId = 1; // example value
 
-            var main = new MainWindow(userId);
+            var main = new ManageBudgetWindow(userId);
             main.Show();
         }
     }
