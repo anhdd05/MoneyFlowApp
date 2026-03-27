@@ -24,4 +24,7 @@ public class User
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
     public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+    public string? FullName { get; set; }
+    public DateTime? ResetTokenExpiry { get; set; }
+    public string? ResetToken { get; set; }
 }
