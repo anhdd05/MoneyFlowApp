@@ -3,5 +3,5 @@
   <Project Path="DataAccessLayer/DataAccessLayer.csproj" />
   <Project Path="MoneyFlowApp/MoneyFlowApp.csproj" />
   <Project Path="Repositories/Repositories.csproj" Id="aaf3807a-6985-41a9-a80d-e202efc131ec" />
-  <Project Path="Services/Services.csproj" />
+  <Project Path="Service/Service.csproj" />
 </Solution>

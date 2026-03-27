@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace WPF_App
+namespace MoneyFlowApp
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -10,5 +10,6 @@ namespace WPF_App
     public partial class App : Application
     {
     }
+
 
 }

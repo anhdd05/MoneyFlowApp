@@ -26,4 +26,6 @@ public partial class Budget
     public virtual BudgetCategory? Category { get; set; }
 
     public virtual User? User { get; set; }
+
+    public decimal Allocated { get; set; }
 }

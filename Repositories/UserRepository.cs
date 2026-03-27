@@ -8,12 +8,12 @@ using BusinessObject.Models;
 using DataAccessLayer;
 namespace Repositories
 {
-    public class UserRepository : IUserRepository
-    {
+public class UserRepository : IUserRepository
+{
         private static UserRepository? _instance;
         public static UserRepository Instance
             => _instance ??= new UserRepository();
-        private UserRepository() { }
+        public UserRepository() { }
         public User? GetById(int id)
         {
             using var ctx = new AppDbContext();
@@ -21,10 +21,16 @@ namespace Repositories
         }
 
         public void Update(User user)
-        {
+    {
             using var ctx = new AppDbContext();
             ctx.Users.Update(user);
             ctx.SaveChanges();
         }
+
+        public User? Login(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
+        
 }

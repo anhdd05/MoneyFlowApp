@@ -1,0 +1,94 @@
+﻿<Window x:Class="MoneyFlowApp.ManageBudgetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MoneyFlowApp"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MoneyFlow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="DarkGreen" Padding="16,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="&lt;" Width="28" Height="28" Click="BtnPrevMonth_Click" Background="Transparent" Foreground="White" BorderBrush="White"/>
+                    <TextBlock x:Name="TxtMonth" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0"/>
+                    <Button Content="&gt;" Width="28" Height="28" Click="BtnNextMonth_Click" Background="Transparent" Foreground="White" BorderBrush="White"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Số dư: " Foreground="White" FontSize="14" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtBalance" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <TabControl Grid.Row="1" Margin="8">
+            <TabItem Header="Quản lý ngân sách">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Content="Thêm" Width="80" Height="30" Margin="0,0,8,0" Click="BtnAddBudget_Click"/>
+                        <Button Content="Sửa" Width="80" Height="30" Margin="0,0,8,0" Click="BtnEditBudget_Click"/>
+                        <Button Content="Xóa" Width="80" Height="30" Margin="0,0,8,0" Click="BtnDeleteBudget_Click"/>
+                        <Button Content="Phân bổ" Width="90" Height="30" Margin="0,0,8,0" Click="BtnAllocate_Click"/>
+                        <Button Content="Tải lại" Width="90" Height="30" Click="BtnRefresh_Click"/>
+                        <Button Content="Báo cáo" Width="90" Height="30" Click="BtnReport_Click" Margin="8,0,0,0"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" x:Name="BudgetGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Danh mục" Binding="{Binding Category.Name}" Width="150"/>
+                            <DataGridTextColumn Header="Loại" Binding="{Binding Category.Type}" Width="80"/>
+                            <DataGridTextColumn Header="Hạn mức (₫)" Binding="{Binding Amount, StringFormat={}{0:N0}}" Width="120"/>
+                            <DataGridTextColumn Header="Đã dùng (₫)" Binding="{Binding Allocated, StringFormat={}{0:N0}}" Width="120"/>
+                            <DataGridTextColumn Header="Còn lại (₫)" Binding="{Binding Remaining, StringFormat={}{0:N0}}" Width="120"/>
+                            <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Tự gia hạn" Binding="{Binding AutoRenew, Mode=OneWay}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Grid.Row="2" x:Name="TxtBudgetSummary" Margin="0,8,0,0" FontStyle="Italic" Foreground="Gray"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Lịch sử giao dịch">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Content="Thêm" Width="80" Height="30" Margin="0,0,8,0" Click="BtnAddTransaction_Click"/>
+                        <Button Content="Tải lại" Width="90" Height="30" Margin="8,0,0,0" Click="BtnRefresh_Click"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" x:Name="TransactionGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ngày" Binding="{Binding Date}" Width="100"/>
+                            <DataGridTextColumn Header="Danh mục" Binding="{Binding Category.Name}" Width="150"/>
+                            <DataGridTextColumn Header="Loại" Binding="{Binding Category.Type}" Width="80"/>
+                            <DataGridTextColumn Header="Số tiền (₫)" Binding="{Binding Amount, StringFormat={}{0:N0}}" Width="130"/>
+                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using Services;
+using Service;
 namespace MoneyFlowApp.View
 {
     /// <summary>

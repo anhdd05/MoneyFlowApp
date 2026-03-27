@@ -9,6 +9,7 @@ namespace Repositories
 {
     public interface IUserRepository
     {
+        User? Login(string email, string password);
         User? GetById(int id);
         void Update(User user);
     }
