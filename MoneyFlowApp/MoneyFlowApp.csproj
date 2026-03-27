@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogicLayer\Services.csproj" />
     <ProjectReference Include="..\BusinessObject\BusinessObject.csproj" />
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
     <ProjectReference Include="..\Repositories\Repositories.csproj" />
