@@ -31,7 +31,7 @@ public partial class AppDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Data Source=LAPTOP-CTE7QML5\\SQLEXPRESS;Initial Catalog=ExpenseManagement;User ID=sa;Password=123456;Encrypt=True;Trust Server Certificate=True");
+            optionsBuilder.UseSqlServer("Server=.;Database=MoneyFlowDb;User ID=sa;Password=12345;Encrypt=True;TrustServerCertificate=True");
         }
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)

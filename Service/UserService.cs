@@ -7,6 +7,7 @@ namespace Service;
 
 public class UserService : IUserService
 {
+    private readonly UserRepository _repository = new UserRepository();
     private readonly UserRepository userRepo = new UserRepository();
     private readonly EmailService emailService = new EmailService();
     
@@ -25,17 +26,24 @@ public class UserService : IUserService
 
     // 2. REGISTER
     // 2. REGISTER - ĐÃ SỬA ĐỂ KHÔNG LỖI DATABASE
-    public void Register(string username, string email, string password)
+    public void Register(string fullName, string email, string password)
     {
+        
+        var existingUser = _repository.GetUserByEmail(email);
+        if (existingUser != null)
+        {
+            throw new Exception("Email này đã được sử dụng! Vui lòng chọn Email khác.");
+        }
+
+        // Nếu chưa có thì mới tiến hành tạo mới
         var newUser = new User
         {
-            FullName = username,
+            FullName = fullName,
             Email = email,
-            Password = password,
-            Role = "User", // Mặc định là User
-            CreatedAt = DateTime.Now
+            Password = password, 
+            Role = "User"
         };
-        userRepo.Add(newUser);
+        _repository.Add(newUser);
     }
 
     // 3. CHANGE PASSWORD (Dùng khi đã đăng nhập vào trong App)

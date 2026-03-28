@@ -10,6 +10,14 @@ namespace Repositories
 {
     public class UserRepository : IUserRepository
     {
+        public User GetUserByEmail(string email)
+        {
+            using (var context = new AppDbContext())
+            {
+                // Nó sẽ tìm trong bảng Users xem có Email nào khớp không
+                return context.Users.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+            }
+        }
         private static UserRepository? _instance;
         public static UserRepository Instance
             => _instance ??= new UserRepository();

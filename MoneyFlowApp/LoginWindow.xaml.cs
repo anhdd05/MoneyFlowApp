@@ -7,12 +7,10 @@ using System.Windows.Media;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System;
 
 namespace MoneyFlowApp
 {
-    /// <summary>
-    /// Interaction logic for LoginWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
         private readonly UserService _userService = new UserService();
@@ -26,21 +24,34 @@ namespace MoneyFlowApp
         {
             txtMessage.Text = "";
             string mode = btnMainAction.Content.ToString();
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
             try
             {
-                // 1. Kiểm tra trống đầu vào
-                if (string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPassword.Password))
+                // --- CHỨC NĂNG VALIDATE CHUNG ---
+
+                // 1. Kiểm tra trống Email
+                if (string.IsNullOrWhiteSpace(txtEmail.Text))
                 {
-                    throw new Exception("Vui lòng nhập đầy đủ Email và Mật khẩu!");
+                    txtEmail.Focus();
+                    throw new Exception("Vui lòng nhập Email!");
                 }
 
-                // 2. Kiểm tra định dạng Email bằng Regex
-                string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                // 2. Kiểm tra định dạng Email
                 if (!Regex.IsMatch(txtEmail.Text, emailPattern))
                 {
+                    txtEmail.Focus();
                     throw new Exception("Định dạng Email không hợp lệ (ví dụ: abc@gmail.com)!");
                 }
+
+                // 3. Kiểm tra trống Mật khẩu
+                if (string.IsNullOrEmpty(txtPassword.Password))
+                {
+                    txtPassword.Focus();
+                    throw new Exception("Vui lòng nhập Mật khẩu!");
+                }
+
+                // --- XỬ LÝ THEO TỪNG CHẾ ĐỘ (MODE) ---
 
                 if (mode == "ĐĂNG NHẬP")
                 {
@@ -48,16 +59,11 @@ namespace MoneyFlowApp
 
                     if (user != null)
                     {
-                        // --- LOGIC PHÂN QUYỀN VÀ HIỆN LỜI CHÀO ---
-
-                        // Ưu tiên hiện FullName, nếu trống thì hiện Email
                         string displayName = !string.IsNullOrEmpty(user.FullName) ? user.FullName : user.Email;
 
-                        // Check Role từ Database (không phân biệt hoa thường)
                         if (user.Role != null && user.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
                         {
                             MessageBox.Show($"Đăng nhập thành công! Chào Admin: {displayName}.", "Thông báo");
-
                             AdminWindow adminWin = new AdminWindow();
                             adminWin.Show();
                             this.Close();
@@ -65,8 +71,6 @@ namespace MoneyFlowApp
                         else
                         {
                             MessageBox.Show($"Đăng nhập thành công! Chào mừng {displayName} quay trở lại.", "Thông báo");
-
-                           
                             AuthWindow auth = new AuthWindow(user.UserId);
                             auth.Show();
                             this.Close();
@@ -79,14 +83,25 @@ namespace MoneyFlowApp
                 }
                 else if (mode == "XÁC NHẬN ĐĂNG KÝ")
                 {
-                    // Đăng ký tài khoản mới với Username (FullName)
+                    // Kiểm tra thêm Username khi Đăng ký
+                    if (string.IsNullOrWhiteSpace(txtUsername.Text))
+                    {
+                        txtUsername.Focus();
+                        throw new Exception("Vui lòng nhập Họ tên (Username) để đăng ký!");
+                    }
+
                     _userService.Register(txtUsername.Text, txtEmail.Text, txtPassword.Password);
                     MessageBox.Show("Đăng ký thành công! Hãy đăng nhập lại bằng tài khoản mới.", "Thành công");
                     btnBackToLogin_Click(null, null);
                 }
                 else if (mode == "ĐẶT LẠI MẬT KHẨU")
                 {
-                    if (string.IsNullOrEmpty(txtToken.Text)) throw new Exception("Vui lòng nhập mã Token từ Email!");
+                    if (string.IsNullOrEmpty(txtToken.Text))
+                    {
+                        txtToken.Focus();
+                        throw new Exception("Vui lòng nhập mã Token (6 số) đã gửi về Email!");
+                    }
+
                     _userService.ResetPassword(txtEmail.Text, txtToken.Text, txtPassword.Password);
                     MessageBox.Show("Đổi mật khẩu thành công! Hãy đăng nhập lại.", "Thông báo");
                     btnBackToLogin_Click(null, null);
@@ -94,7 +109,6 @@ namespace MoneyFlowApp
             }
             catch (Exception ex)
             {
-                // Hiện lỗi SQL hoặc lỗi logic ra màn hình
                 txtMessage.Text = ex.Message;
                 txtMessage.Foreground = Brushes.Red;
             }
@@ -104,17 +118,18 @@ namespace MoneyFlowApp
         {
             try
             {
-                if (string.IsNullOrEmpty(txtEmail.Text))
+                // Validate Email trước khi gửi mã
+                if (string.IsNullOrWhiteSpace(txtEmail.Text))
                 {
-                    txtMessage.Text = "Nhập Email trước khi bấm Quên mật khẩu!";
-                    txtMessage.Foreground = Brushes.OrangeRed;
-                    return;
+                    txtEmail.Focus();
+                    throw new Exception("Nhập Email của bạn trước khi bấm Quên mật khẩu!");
                 }
 
                 string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
                 if (!Regex.IsMatch(txtEmail.Text, emailPattern))
                 {
-                    throw new Exception("Vui lòng nhập đúng định dạng Email để nhận mã!");
+                    txtEmail.Focus();
+                    throw new Exception("Vui lòng nhập đúng định dạng Email để nhận mã xác nhận!");
                 }
 
                 txtTitle.Text = "Khôi phục mật khẩu";
@@ -159,4 +174,4 @@ namespace MoneyFlowApp
             txtMessage.Text = "";
         }
     }
-}   
+}

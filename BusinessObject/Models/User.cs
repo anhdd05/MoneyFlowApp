@@ -6,31 +6,28 @@ namespace BusinessObject.Models;
 
 public class User
 {
+    // Giữ nguyên các ID và các trường bắt buộc
     public int UserId { get; set; }
 
-    public string UserName { get; set; } = null!;
-
-    public string Email { get; set; } = null!;
-
-    public string Password { get; set; } = null!;
-
+    // Sửa các trường này thành Nullable để tránh lỗi "Data is Null" khi Login
+    public string? UserName { get; set; }
+    public string? Email { get; set; }
+    public string? Password { get; set; }
+    public string? FullName { get; set; }
     public string? Role { get; set; }
 
+    // Các trường Boolean nên để giá trị mặc định hoặc Nullable
+    public bool IsBanned { get; set; } = false;
+
+    // Các trường DateTime đã là Nullable, giữ nguyên
     public DateTime? CreatedAt { get; set; }
-
     public DateTime? LastActive { get; set; }
-
-    public virtual ICollection<Budget> Budgets { get; set; } = new List<Budget>();
-
-    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
-
-    public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
-    public string? FullName { get; set; }
+    public DateTime? LastLoginAt { get; set; }
     public DateTime? ResetTokenExpiry { get; set; }
     public string? ResetToken { get; set; }
-    [Column("last_active", TypeName = "datetime")]
-    public DateTime? LastLoginAt { get; set; }
 
-    [Column("is_banned")]
-    public bool IsBanned { get; set; }
+    // Navigation properties giữ nguyên
+    public virtual ICollection<Budget> Budgets { get; set; } = new List<Budget>();
+    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+    public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 }
