@@ -40,7 +40,7 @@ namespace Repositories
             {
                 "active" => q.Where(u => !u.IsBanned),
                 "banned" => q.Where(u => u.IsBanned),
-                "unverified" => q.Where(u => u.LastLoginAt == null),
+                "unverified" => q.Where(u => u.LastActive == null),
                 _ => q
             };
             return q.OrderBy(u => u.UserId).ToList();
@@ -61,7 +61,7 @@ namespace Repositories
         public void UpdateLastLogin(int userId)
         {
             var u = db.Users.Find(userId);
-            if (u != null) { u.LastLoginAt = DateTime.Now; db.SaveChanges(); }
+            if (u != null) { u.LastActive = DateTime.Now; db.SaveChanges(); }
         }
 
         public List<TransactionCategory> GetAllTransactionCategories() =>

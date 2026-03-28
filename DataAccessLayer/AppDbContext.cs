@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using BusinessObject.Models;
@@ -30,9 +30,7 @@ public partial class AppDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer("Server=.;Database=MoneyFlowDb;User ID=sa;Password=12345;Encrypt=True;TrustServerCertificate=True");
-        }
+            optionsBuilder.UseSqlServer("Server=.;Database=ExpenseManagement;User ID=sa;Password=123;Encrypt=True;TrustServerCertificate=True");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

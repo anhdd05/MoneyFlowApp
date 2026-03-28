@@ -22,5 +22,16 @@ namespace MoneyFlowApp.Admin
             AdminCategory?.LoadAll();
             AdminUser?.LoadUsers();
         }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                SessionManager.Logout();
+                var loginWin = new LoginWindow();
+                loginWin.Show();
+                this.Close();
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,12 +17,12 @@ public class User
     public string? Role { get; set; }
 
     // Các trường Boolean nên để giá trị mặc định hoặc Nullable
+    [Column("is_banned")]
     public bool IsBanned { get; set; } = false;
 
     // Các trường DateTime đã là Nullable, giữ nguyên
     public DateTime? CreatedAt { get; set; }
     public DateTime? LastActive { get; set; }
-    public DateTime? LastLoginAt { get; set; }
     public DateTime? ResetTokenExpiry { get; set; }
     public string? ResetToken { get; set; }
 

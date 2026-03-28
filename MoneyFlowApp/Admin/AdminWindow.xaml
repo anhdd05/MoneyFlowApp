@@ -11,7 +11,10 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Background="#1565C0" Padding="16,12">
-            <TextBlock Text="Khu vực Quản trị (Admin Workspace)" FontSize="18" FontWeight="Bold" Foreground="White"/>
+            <Grid>
+                <TextBlock Text="Khu vực Quản trị (Admin Workspace)" FontSize="18" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                <Button Content="ĐĂNG XUẤT" HorizontalAlignment="Right" Width="100" Height="30" Background="#E74C3C" Foreground="White" FontWeight="Bold" Click="BtnLogout_Click" BorderThickness="0" Cursor="Hand"/>
+            </Grid>
         </Border>
 
         <TabControl Grid.Row="1" Margin="8" x:Name="AdminTabControl" SelectionChanged="AdminTabControl_SelectionChanged">

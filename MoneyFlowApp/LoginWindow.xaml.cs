@@ -59,6 +59,16 @@ namespace MoneyFlowApp
 
                     if (user != null)
                     {
+                        // Lưu Session User dùng chung
+                        SessionManager.CurrentUser = user;
+
+                        // Cập nhật giờ online phục vụ Admin
+                        try
+                        {
+                            new AdminService().UpdateLastLogin(user.UserId);
+                        }
+                        catch { }
+
                         string displayName = !string.IsNullOrEmpty(user.FullName) ? user.FullName : user.Email;
 
                         if (user.Role != null && user.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))

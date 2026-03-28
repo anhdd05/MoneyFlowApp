@@ -33,9 +33,9 @@ namespace MoneyFlowApp.Admin
                 u.UserName,
                 u.Email,
                 u.Role,
-                StatusLabel = u.IsBanned ? "Bị khóa" : (u.LastLoginAt == null ? "Chưa xác minh" : "Active"),
+                StatusLabel = u.IsBanned ? "Bị khóa" : (u.LastActive == null ? "Chưa xác minh" : "Active"),
                 CreatedAtStr = u.CreatedAt?.ToString("dd/MM/yyyy HH:mm") ?? "-",
-                LastLoginStr = u.LastLoginAt?.ToString("dd/MM/yyyy HH:mm") ?? "-"
+                LastLoginStr = u.LastActive?.ToString("dd/MM/yyyy HH:mm") ?? "-"
             }).ToList();
         }
 
@@ -78,7 +78,7 @@ namespace MoneyFlowApp.Admin
                 $"Email: {u.Email}\n" +
                 $"Role: {u.Role}\n" +
                 $"Ngày tạo: {u.CreatedAt:dd/MM/yyyy HH:mm}\n" +
-                $"Lần đăng nhập cuối: {(u.LastLoginAt.HasValue ? u.LastLoginAt.Value.ToString("dd/MM/yyyy HH:mm") : "Chưa đăng nhập")}\n" +
+                $"Lần đăng nhập cuối: {(u.LastActive.HasValue ? u.LastActive.Value.ToString("dd/MM/yyyy HH:mm") : "Chưa đăng nhập")}\n" +
                 $"Trạng thái: {(u.IsBanned ? "Bị khóa" : "Hoạt động")}\n\n" +
                 "(Không hiển thị số dư hay chi tiết giao dịch - Data Masking)";
             MessageBox.Show(msg, "Chi tiết người dùng");
