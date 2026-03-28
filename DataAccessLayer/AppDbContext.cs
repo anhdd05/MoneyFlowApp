@@ -31,7 +31,7 @@ public partial class AppDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Server=LAPTOP-CTE7QML5\\SQLEXPRESS;Database=ExpenseManagment;ID=sa;Password=123456;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=.;Database=.;ID=sa;Password=.;Trusted_Connection=True;TrustServerCertificate=True;");
         }
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
