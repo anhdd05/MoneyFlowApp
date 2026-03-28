@@ -23,6 +23,7 @@ namespace MoneyFlowApp.View
     {
         private readonly IUserService _userService = new UserService();
 
+
         public UserProfileWindow()
         {
             InitializeComponent();
@@ -44,7 +45,7 @@ namespace MoneyFlowApp.View
 
             lblName.Text = user.UserName;
             lblEmail.Text = user.Email;
-            lblRole.Text = user.Role == "admin" ? "Quản trị viên" : "Người dùng";
+            
             lblCreatedAt.Text = user.CreatedAt?.ToString("dd/MM/yyyy") ?? "N/A";
         }
 
